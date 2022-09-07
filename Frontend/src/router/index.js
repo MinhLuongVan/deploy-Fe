@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
- //import {useAuthStore} from '../stores/auth'
+//  import {useAuthStore} from '../stores/auth'
 import Login from "../views/Login/Login.vue";
 import Register from "../views/Register/Register.vue";
 import Listtodo from "../views/Todos/Listtodo.vue";
@@ -7,6 +7,7 @@ import Addtodo from "../views/Todos/Addtodo.vue";
 import Updatetodo from "../views/Todos/Updatetodo.vue";
 import Listuser from "../views/Users/Listuser.vue";
 import Adduser from "../views/Users/Adduser.vue";
+import Cookies from 'js-cookie';
 import Updateuser from "../views/Users/Updateuser.vue";
 
 const routes = [
@@ -23,25 +24,40 @@ const routes = [
   {
     path : "/todolist",
     component : Listtodo,
-    // meta : {
-    //   requiresAuth: true,
-    // },
-    // beforeEnter(to, from, next){
-    //   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    //     const authStore = useAuthStore();
-    //     if( authStore.isAuthenticated){
-    //       next();
-    //     }else{
-    //       next('/');
-    //     }
-    //   }else {
-    //   next();
-    //   }
-    // }
+    meta : {
+      requiresAuth: true,
+    },
+    beforeEnter(to, from, next){
+      if (to.matched.some((record) => record.meta.requiresAuth)) {
+        // const authStore = useAuthStore();
+        if(Cookies.get('token')){
+          next();
+        }else{
+          next('/');
+        }
+      }else {
+      next();
+      }
+    }
   },
   {
     path: "/addtodo",
     component: Addtodo,
+    meta : {
+      requiresAuth: true,
+    },
+    beforeEnter(to, from, next){
+      if (to.matched.some((record) => record.meta.requiresAuth)) {
+        // const authStore = useAuthStore();
+        if(Cookies.get('token')){
+          next();
+        }else{
+          next('/');
+        }
+      }else {
+      next();
+      }
+    }
   },
   {
     path: "/edittodo/:id",
@@ -66,5 +82,7 @@ const router = createRouter({
   routes,
 });
 export default router;
+
+
 
 
