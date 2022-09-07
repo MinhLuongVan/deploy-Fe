@@ -10,14 +10,14 @@
               src="@/assets/images/logo1.jpg"
             />
 
-            <p class="text-center pt-4 text-purple-700 font-serif text-2xl">
+            <p class="text-center pt-4 text-red-500 font-serif text-2xl">
               -----Welcome to my app-----
             </p>
           </div>
         </div>
         <!-- END: Register Info -->
         <!-- BEGIN: Register Form -->
-        <div class="h-screen flex py-5 bg-pink-200">
+        <div class="h-screen flex py-5 ">
           <div
             class="my-1 mx-auto xl:ml-20 bg-white dark:bg-darkmode-600 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0  shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto"
           >
@@ -71,7 +71,7 @@
             </div>
             <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
               <button
-                class="bg-purple-500 hover:bg-purple-700 rounded-xl py-2 font-serif px-4 w-full text-lg text-white align-top"
+                class="bg-blue-500 hover:bg-blue-700 rounded-xl py-2 font-serif px-4 w-full text-lg text-white align-top"
                 @click="submitRegister"
               >
                 Register
@@ -80,7 +80,7 @@
               <div class=" mt-5 justify-center flex text-base ">
                 <p  class="font-serif text-lg">
                   Do not have an account ?
-                  <a class=" text-purple-500 hover:text-purple-700" 
+                  <a class=" text-red-500 hover:text-red-700" 
                   href="/">Sign In</a> 
                 </p>
               </div>
