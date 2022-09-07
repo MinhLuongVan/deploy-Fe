@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <div class="flex w-full justify-between h-20 bg-emerald-400">
+   <div class="bg-orange-200 ">
+    <div class="flex justify-between h-20 bg-cyan-200 border-b border-r-2">
       <div class="flex">
-        <img src="../../assets/images/logo3.webp" class="w-28 h-full" />
-        <h2 class="text-3xl text-indigo-700 font-serif font-bold mt-5 ml-2">
+        <img src="../../assets/images/lg.jpg" class="w-28 h-full" />
+        <h2 class="text-3xl text-violet-700 font-serif font-bold mt-5 ml-2">
           List Todos
         </h2>
       </div>
@@ -37,20 +37,25 @@
         </button>
       </div>
     </div>
+    <div class="flex justify-center mt-3">
+      <p class="text-xl font-serif text-red-600">
+        Your Todos for Today : {{ currentDate() }}
+      </p>
+    </div>
     <!-- BEGIN: Data List -->
-    <div class="intro-y col-span-12 lg:overflow-visibl">
-      <table class="table table-report mt-2 mr-3">
+    <div class="intro-y col-span-12 lg:overflow-visible h-screen ">
+      <table class="table table-report">
         <thead v-if="todoHidden !== 0">
           <tr>
             <th
-              class="text-center text-xl font-serif text-purple-700 whitespace-nowrap"
+              class="text-center text-xl font-serif  text-purple-800 whitespace-nowrap"
             >
               Title
             </th>
             <th
-              class="text-center text-xl font-serif text-purple-700 whitespace-nowrap"
+              class="text-center text-xl font-serif text-purple-700 "
             >
-              Status
+             Created
             </th>
             <th
               class="text-center text-xl font-serif text-purple-700 whitespace-nowrap"
@@ -60,36 +65,45 @@
           </tr>
         </thead>
         <thead v-else>
-          <h1 class="text-center text-lg font-serif text-purple-700">
+          <h1 class="text-center text-lg font-serif text-blue-700">
             Bạn chưa có công việc nào,hãy thêm công việc của bạn!
           </h1>
         </thead>
-        <tbody>
-          <tr v-for="item in todos" :key="item._id" class="intro-x">
-            <td class="text-base text-center w-96">
-              <p class="font-serif w-full text-purple-500">
-                {{ item.title }}
+        <tbody  >
+          <tr v-for="item in todos" :key="item._id" class="w-full">
+            <td class="text-base text-purple-700 w-1/5">
+              <div class="flex items-center ">
+                <input class="rounded-xl w-5 h-5"
+                  :id="'checkbox-' + item._id"
+                  :checked="item.status"
+                  type="checkbox"
+                  true-value="true"
+                  false-value="false"
+                  @change="clickBox(item)"
+                />
+                <!-- <p
+                  v-if="item.title.length >= 50"
+                  class="font-serif pl-3 text-purple-500"
+                >
+                  {{ item.title.slice(0, 49) }}...
+                </p> -->
+                <p class="line-clamp-6 max-w-xl font-serif pl-2 hover:overflow-visible">
+                  {{ item.title }}
+                </p>
+              </div>
+            </td>
+            <td class="text-base text-center w-1/6">
+              <p class="font-serif text-purple-500">
+                {{ moment(item.createdAt).format('H:mm') }}
               </p>
             </td>
-
-            <td class="text-center border-none w-96">
-              <input
-                :id="'checkbox-' + item._id"
-                :checked="item.status"
-                type="checkbox"
-                true-value="true"
-                false-value="false"
-                @change="clickBox(item)"
-              />
-            </td>
-
-            <td class="w-96">
+            <td class="w-1/5">
               <div class="flex justify-center items-center">
                 <a
                   class="flex items-center text-green-500"
                   @click="handlUpdate(item)"
                 >
-                  <EditIcon class="w-5 h-5 ml-3 mr-5" />
+                  <EditIcon class="w-5 h-5 mr-3" />
                 </a>
                 <a
                   class="flex items-center text-danger"
@@ -105,7 +119,7 @@
 
       <div class="mt-10" v-if="todoHidden !== 0">
         <paginate
-          class="flex justify-center items-center"
+          class="flex justify-center"
           :page-count="totalPages"
           :click-handler="getToDoPage"
           :prev-text="'<<'"
@@ -124,7 +138,7 @@
             <div class="text-3xl mt-5 text-purple-700 font-serif">
               Are you sure?
             </div>
-            <div class="mt-2 text-purple-700 font-serif">
+            <div class="mt-2 text-purple-700 text-base font-serif">
               Do you really want to delete this content?
             </div>
           </div>
@@ -136,25 +150,18 @@
             >
               Cancel
             </button>
-            <!-- <button
+            <button
               type="button"
-              class="w-24 h-9 text-white rounded-lg bg-red-500 hover:bg-red-700"
+              class="w-24 h-8 text-white rounded-lg bg-red-500 hover:bg-red-700"
               @click="handlDelete()"
             >
               Delete
-            </button> -->
-            <button
-              class="btn h-8 rounded-lg font-serif text-white bg-red-500 hover:bg-red-700"
-              @click="handlDelete"
-            >
-              Delete
-              <LoadingIcon icon="puff" color="white" class="w-4 h-4 ml-2" />
             </button>
           </div>
         </ModalBody>
       </Modal>
     </div>
-  </div>
+   </div>
 </template>
 
 <script>
@@ -164,6 +171,7 @@ import { storeToRefs } from 'pinia';
 import { useTodosStore } from '../../stores/todo';
 import Cookies from 'js-cookie';
 import Paginate from 'vuejs-paginate-next';
+import moment from 'moment';
 import {
   requestDeleteToDo,
   requestUpdateToDo,
@@ -188,6 +196,17 @@ export default {
     const deleteConfirmationModal = ref(false);
     const todoHidden = ref(0);
     const todosStore = useTodosStore();
+
+    function currentDate() {
+      const current = new Date();
+      const date =
+        current.getDate() +
+        '/' +
+        (current.getMonth() + 1) +
+        '/' +
+        current.getFullYear();
+      return date;
+    }
 
     async function getToDoPage(page) {
       if (page === undefined) {
@@ -224,7 +243,6 @@ export default {
     const handlDelete = async () => {
       try {
         const todo = await requestDeleteToDo(todosStore.chosenTodo._id);
-        console.log('todo1', todo);
         deleteConfirmationModal.value = false;
         getToDoPage();
       } catch (error) {
@@ -281,7 +299,9 @@ export default {
       deleteConfirmationModal,
       chosenTodo,
       actionOpenDeleteModal,
-      todoHidden
+      todoHidden,
+      currentDate,
+      moment
     };
   }
 };
