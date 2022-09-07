@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-orange-200 h-screen">
     <div class="flex w-full h-20 bg-cyan-200 border-b border-r-2">
       <img src="../../assets/images/lg.jpg" class=" w-28 h-full">
       <h2 class="text-3xl text-center text-purple-700 font-serif font-bold mt-5 ml-8">
