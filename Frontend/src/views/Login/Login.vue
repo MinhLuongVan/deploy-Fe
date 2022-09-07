@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="container sm:px-10">
-      <div class="block xl:grid grid-cols-2 gap-4">
+    <div class="container sm:px-10 ">
+      <div class="block xl:grid grid-cols-2 gap-4 ">
         <!-- BEGIN: Register Info -->
         <div class="hidden xl:flex flex-col min-h-screen">
           <div>
@@ -9,20 +9,17 @@
               class="-intro-x w-full h-full mt-14"
               src="@/assets/images/logo1.jpg"
             />
-            <p class="text-center pt-4 text-purple-700 font-serif text-2xl">
+            <p class="text-center pt-4 text-red-500 font-serif text-2xl">
               -----Welcome to my app-----
             </p>
           </div>
         </div>
         <!-- END: Register Info -->
         <!-- BEGIN: Register Form -->
-        <div class="h-screen flex py-5 bg-pink-200">
+        <div class="h-screen flex py-5">
           <div
-            class="my-4 mx-auto xl:ml-20 bg-white dark:bg-darkmode-600 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto"
+            class=" mx-auto xl:ml-20 bg-white dark:bg-darkmode-600 xl:bg-transparent px-5 sm:px-8  xl:p-0 shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto"
           >
-            <!-- <Alert class="alert-danger flex items-center mt-5">
-              <AlertOctagonIcon class="w-6 h-4 mr-2" /> Sai username hoặc password
-            </Alert> -->
             <h2
               class="intro-x font-serif text-purple-700 text-2xl xl:text-3xl text-center xl:text-left mt-32"
             >
@@ -54,7 +51,7 @@
             </div>
             <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
               <button
-                class="bg-purple-500 hover:bg-purple-700 rounded-xl py-2 font-serif px-4 w-full text-lg text-white align-top"
+                class="bg-blue-500 hover:bg-blue-700 rounded-xl py-2 font-serif px-4 w-full text-lg text-white align-top"
                 @click="submitLogin"
               >
                 Login
@@ -63,7 +60,7 @@
                 <p class="font-serif text-lg">
                   Do not have an account ?
                   <a
-                    class="text-purple-500 hover:text-purple-700"
+                    class="text-red-500 hover:text-red-700"
                     href="/register"
                     >Sign up</a
                   >
@@ -150,3 +147,4 @@ export default {
   }
 };
 </script>
+
