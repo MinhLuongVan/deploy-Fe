@@ -6,13 +6,13 @@
             @apply border-b-0;
         }
         td {
-            @apply bg-white border-b-0 dark:bg-darkmode-600  ;
+            @apply bg-white border-b-0 dark:bg-darkmode-600 px-3  ;
             box-shadow: 20px 3px 20px #0000000b;
             &:first-child {
-                @apply rounded-l-md;
+                @apply rounded-l-2xl;
             }
             &:last-child {
-                @apply rounded-r-md;
+                @apply rounded-r-2xl;
             }
             &.table-report__action {
                 @apply py-0 relative before:block before:w-px before:h-8 before:bg-slate-200 before:absolute before:left-0 before:inset-y-0 before:my-auto before:dark:bg-darkmode-400;
