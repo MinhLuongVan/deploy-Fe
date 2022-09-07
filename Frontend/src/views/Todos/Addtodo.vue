@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="flex w-full h-20 bg-emerald-400">
-      <img src="../../assets/images/logo3.webp" class=" w-28 h-full">
+    <div class="flex w-full h-20 bg-cyan-200 border-b border-r-2">
+      <img src="../../assets/images/lg.jpg" class=" w-28 h-full">
       <h2 class="text-3xl text-center text-purple-700 font-serif font-bold mt-5 ml-8">
         List Todos
       </h2>
