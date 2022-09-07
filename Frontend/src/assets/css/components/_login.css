@@ -1,7 +1,7 @@
 .login {
     @apply relative overflow-hidden bg-pink-200 ;
     @include media-breakpoint-down(xl) {
-        @apply bg-pink-200;
+        @apply bg-white;
     }
     /* &:before {
         content: "";
