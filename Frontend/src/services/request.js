@@ -17,3 +17,13 @@ export const request = axios.create({
     },
 });
 
+export function apiClient(cookie) {
+  return axios.create({
+     baseURL: "http://103.56.162.78:8000",
+   // baseURL: 'http://localhost:8000',
+    headers: {
+      token: `Bearer ${cookie}`
+    }
+  })
+}
+
